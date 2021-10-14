@@ -7,8 +7,8 @@ import math
 
 # define BMP388 Device I2C address
 
-I2C_ADD_BMP388_AD0_LOW = 0x76
-I2C_ADD_BMP388_AD0_HIGH = 0x77
+I2C_ADD_BMP388_AD0_LOW = const(0x76)
+I2C_ADD_BMP388_AD0_HIGH = const(0x77)
 I2C_ADD_BMP388 = I2C_ADD_BMP388_AD0_HIGH
 
 BMP388_REG_ADD_WIA = 0x00
@@ -75,14 +75,14 @@ class BMP388(object):
         # Load calibration values.
 
         if self._read_byte(BMP388_REG_ADD_WIA) == BMP388_REG_VAL_WIA:
-            print("Pressure sersor is BMP388!\r\n")
+            print("Pressure sensor is BMP388!\r\n")
             u8RegData = self._read_byte(BMP388_REG_ADD_STATUS)
             if u8RegData & BMP388_REG_VAL_CMD_RDY:
                 self._write_byte(BMP388_REG_ADD_CMD,
                                  BMP388_REG_VAL_SOFT_RESET)
                 time.sleep(0.01)
         else:
-            print ("Pressure sersor NULL!\r\n")
+            print ("Pressure sensor NULL!\r\n")
         self._write_byte(BMP388_REG_ADD_PWR_CTRL,
                          BMP388_REG_VAL_PRESS_EN
                          | BMP388_REG_VAL_TEMP_EN
@@ -204,15 +204,15 @@ class BMP388(object):
         return (temperature, pressure, altitude)
 
 
-if __name__ == '__main__':
-
-	import time
-	
-	print("BMP388 Test Program ...\n")
-	
-	bmp388 = BMP388()
-				
-	while True:
-		time.sleep(0.5)
-		temperature,pressure,altitude = bmp388.get_temperature_and_pressure_and_altitude()
-		print(' Temperature = %.1f Pressure = %.2f  Altitude =%.2f '%(temperature/100.0,pressure/100.0,altitude/100.0))
+# if __name__ == '__main__':
+#
+# 	import time
+#
+# 	print("BMP388 Test Program ...\n")
+#
+# 	bmp388 = BMP388()
+#
+# 	while True:
+# 		time.sleep(0.5)
+# 		temperature,pressure,altitude = bmp388.get_temperature_and_pressure_and_altitude()
+# 		print(' Temperature = %.1f Pressure = %.2f  Altitude =%.2f '%(temperature/100.0,pressure/100.0,altitude/100.0))
