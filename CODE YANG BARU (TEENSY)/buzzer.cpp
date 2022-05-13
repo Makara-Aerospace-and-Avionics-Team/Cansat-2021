@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 int buzzerPin = 13;
 
 void setup() {
@@ -41,4 +40,3 @@ void loop() {
 int some_altitude_function() {
   return 0;
 }
->>>>>>> 6d413fe768224256a957809964690a574f52b420
